@@ -1,0 +1,235 @@
+<?php
+
+$resource = Mage::getSingleton('core/resource');
+
+$readConnection = $resource->getConnection('core_read');
+
+$writeConnection = $resource->getConnection('core_write');
+
+$readConnection = $resource->getConnection('core_read');
+
+$cust_id = Mage::getSingleton('customer/session')->getCustomer()->getId();
+
+$query = 'SELECT * FROM scratch_cards where customer_id ='.$cust_id;
+$query1 = 'SELECT count(*) as len FROM scratch_cards where customer_id ='.$cust_id;
+$total_amt_credit = 'SELECT sum(amount) as total_amt_credit FROM scratch_cards where customer_id ='.$cust_id;
+
+$results = $readConnection->fetchAll($query);
+$results1 = $readConnection->fetchAll($query1);
+$total_amt_credit = $readConnection->fetchAll($total_amt_credit);
+
+$no_of_card = $results1[0]['len'];
+//$card_ammt = ['1','2','5','7','0','','1','12','553','','0','3','','3','78'];
+$card_ammt = $results; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Scratch</title>
+    <h1 style="color: #382ba7;">Rewards</h1><span style="font-size: larger;">You have <?php echo '₹'.$total_amt_credit[0]['total_amt_credit'];?></span>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<?php $base_url_image = Mage::getStoreConfig(Mage_Core_Model_Url::XML_PATH_SECURE_URL); ?>
+<?php for($i = 0; $i < $no_of_card; $i++) { ?>
+    <div class="container" style="margin-top:30px;">
+        <div class="row">
+            <?php while($i < $no_of_card && $card_ammt[$i]['amount'] == '0') $i++; if($i < $no_of_card) { ?>
+                <div class="col-sm-3">
+                    <div class="card" style="height: 11rem;">
+
+                        <?php if($card_ammt[$i]['amount'] !== ''){ ?>
+                            <div class="card-body">
+                                <p class = "credit-amt"><img  src="<?php echo $this->getSkinUrl('images/aw_raf/win.png');?>" width="55" height="55"></p>
+                                <h7>You've won</h7>
+                                <h3 class="card-title" style="text-align: center;">
+                                    <?php echo '₹'.$card_ammt[$i]['amount']; ?>
+                                </h3>
+                            </div>
+                        <?php } else { ?>
+                            <div class="card-body">
+                                <h7 class="luck">It's all your <span class="red-color">luck</span>!</h7>
+                                <h3 class="card-title" >
+                                    <button class= "scratch" value = "<?php echo $card_ammt[$i]['card_id'];?>">?</button>
+                                </h3>
+                            </div>
+                        <?php } ?>
+
+                    </div>
+                </div>
+                <?php $i++; }?>
+            <?php while($i < $no_of_card && $card_ammt[$i]['amount'] == '0') $i++; if($i < $no_of_card) { ?>
+                <div class="col-sm-3">
+                    <div class="card" style="height: 11rem;">
+
+                        <?php if($card_ammt[$i]['amount'] !== ''){ ?>
+                            <div class="card-body">
+                                <p class = "credit-amt"><img  src="<?php echo $this->getSkinUrl('images/aw_raf/win.png');?>" width="55" height="55"></p>
+                                <h7>You've won</h7>
+                                <h3 class="card-title" style="text-align: center;">
+                                    <?php echo '₹'.$card_ammt[$i]['amount']; ?>
+                                </h3>
+                            </div>
+                        <?php } else { ?>
+                            <div class="card-body">
+                                <h7 class="luck">It's all your <span class="red-color">luck</span>!</h7>
+                                <h3 class="card-title" >
+                                    <button class= "scratch" value = "<?php echo $card_ammt[$i]['card_id'];?>">?</button>
+                                </h3>
+                            </div>
+                        <?php } ?>
+
+                    </div>
+                </div>
+                <?php $i++; }?>
+            <?php while($i < $no_of_card && $card_ammt[$i]['amount'] == '0') $i++; if($i < $no_of_card) { ?>
+                <div class="col-sm-3">
+                    <div class="card" style="height: 11rem;">
+
+                        <?php if($card_ammt[$i]['amount'] !== ''){ ?>
+                            <div class="card-body">
+                                <p class = "credit-amt"><img  src="<?php echo $this->getSkinUrl('images/aw_raf/win.png');?>" width="55" height="55"></p>
+                                <h7>You've won</h7>
+                                <h3 class="card-title" style="text-align: center;">
+                                    <?php echo '₹'.$card_ammt[$i]['amount']; ?>
+                                </h3>
+                            </div>
+                        <?php } else { ?>
+                            <div class="card-body">
+                                <h7 class="luck">It's all your <span class="red-color">luck</span>!</h7>
+                                <h3 class="card-title" >
+                                    <button class= "scratch" value = "<?php echo $card_ammt[$i]['card_id'];?>">?</button>
+                                </h3>
+                            </div>
+                        <?php } ?>
+
+                    </div>
+                </div>
+                <?php $i++;}?>
+            <?php while($i < $no_of_card && $card_ammt[$i]['amount'] == '0') $i++; if($i < $no_of_card) { ?>
+                <div class="col-sm-3">
+                    <div class="card" style="height: 11rem;">
+
+                        <?php if($card_ammt[$i]['amount'] !== ''){ ?>
+                            <div class="card-body">
+                                <p class = "credit-amt"><img  src="<?php echo $this->getSkinUrl('images/aw_raf/win.png');?>" width="55" height="55"></p>
+                                <h7>You've won</h7>
+                                <h3 class="card-title" style="text-align: center;">
+                                    <?php echo '₹'.$card_ammt[$i]['amount']; ?>
+                                </h3>
+                            </div>
+                        <?php } else { ?>
+                            <div class="card-body">
+                                <h7 class="luck">It's all your <span class="red-color">luck</span>!</h7>
+                                <h3 class="card-title" >
+                                    <button class= "scratch" value = "<?php echo $card_ammt[$i]['card_id'];?>">?</button>
+                                </h3>
+                            </div>
+                        <?php } ?>
+
+                    </div>
+                </div>
+            <?php }?>
+        </div>
+
+        <div class="modal fade" id="scratchModal" role="dialog" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+
+                    <img id="img-luck" class= "bad-luck" style=" width: 100px;height: 100px;" src="">
+                    <div class="modal-body">
+                        <h3 id="scratchData" style="text-align: center;"></h3>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+<?php } ?>
+<script>jQuery.noConflict();</script>
+
+<script>
+    jQuery(".scratch").click(function(e){
+        jQuery.ajax({
+            url: "<?php echo $this->getUrl('aw_scratch/index/ajax');?>",
+            type: "POST",
+            dataType: 'json',
+            data:{
+                scratchId:e.target.value
+            },
+            success: function (data) {
+                if(data.outputHtml === '0') {
+                    jQuery("#scratchData").html('Better Luck Next Time');
+                    jQuery("#img-luck").attr('src','https://dumielauxepices.net/sites/default/files/sad-emoji-clipart-guilty-751050-1869468.png');
+                }else {
+                    jQuery("#scratchData").html('₹' + data.outputHtml);
+                    jQuery("#img-luck").attr('src','https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1006118187,width=178,height=178/smiling-happy-emoji-face.png');
+                }
+                jQuery('#scratchModal').modal('show');
+            }
+        });
+    });
+
+    jQuery('#scratchModal').on('hidden.bs.modal', function () {
+        location.reload();
+    })
+</script>
+<style>
+    .card-body{
+        background-color: #e8eaed;
+    }
+    .card-body .credit-amt{
+        margin-left: 32%;
+        margin-top: -10%;
+    }
+    .card-body h7{
+        margin-left: 23%;
+    }
+    .card-body .luck{
+        margin-left: 13%;
+    }
+    .card-body button{
+        width: 5rem;
+        height: 5rem;
+        background-color: #ffcd4c;
+        margin-top: 11%;
+        margin-left: 23%;
+    }
+    .card-body h6{
+        color: white;
+        font-size: 12px;
+    }
+    .card-body .unscratch{
+        margin-left: 32%;
+    }
+    .card-body .red-color{
+        color: red;;
+    }
+    #scratchModal .modal-content{
+        width: 444px;
+        height: 333px;
+        margin: auto;
+    }
+    #scratchModal .bad-luck{
+        width: 120px !important;;
+        height: 120px !important;;
+        margin-left: 37%;
+        margin-top: 11%;
+    }
+
+</style>
+</body>
+</html>
+
+
+
+

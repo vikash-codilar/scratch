@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<config>
+   <sections>
+       <aw_options translate="label" module="aw_scratch">
+            <label>toc</label>
+            <tab>toc</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <scratch translate="label">
+                    <label>Scratch Card Settings</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>70</sort_order>
+                    <fields>
+                        <total_amount translate="total amount">
+                            <label><![CDATA[Total amount]]></label>
+                            <comment><![CDATA[Define the total amount to distribute]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </total_amount>
+                        <first_percent translate="first percent">
+                            <label><![CDATA[40%]]></label>
+                            <comment><![CDATA[Define the 40% money range]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </first_percent>
+                        <second_percent translate="second percent">
+                            <label><![CDATA[30%]]></label>
+                            <comment><![CDATA[Define the 30% money range]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </second_percent>
+                        <third_percent translate="third percent">
+                            <label><![CDATA[30%]]></label>
+                            <comment><![CDATA[Define the 30% money range]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </third_percent>
+
+                    </fields>
+                </scratch>
+            </groups>
+        </aw_options>
+    </sections>
+</config>

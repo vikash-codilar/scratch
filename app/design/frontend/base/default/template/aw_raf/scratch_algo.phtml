@@ -1,0 +1,71 @@
+<?php
+$store = Mage::app()->getStore(); // store info
+$configValue = Mage::getStoreConfig('aw_options/scratch/first_percent', $store);
+
+Mage::log($configValue);
+
+$admin_amount = (int)Mage::getStoreConfig('aw_options/scratch/total_amount', $store);
+Mage::log($admin_amount);
+
+$first_perc = $configValue = Mage::getStoreConfig('aw_options/scratch/first_percent', $store);
+$first_perc = explode("-",$first_perc);
+$second_perc = $configValue = Mage::getStoreConfig('aw_options/scratch/second_percent', $store);;
+$second_perc = explode("-",$second_perc);
+$third_perc = $configValue = Mage::getStoreConfig('aw_options/scratch/third_percent', $store);;
+$third_perc = explode("-",$third_perc);
+
+$perc = [40, 30, 30];
+$arr = [[(int)$first_perc[0],(int)$first_perc[1]],[(int)$second_perc[0],(int)$second_perc[1]],[(int)$third_perc[0],(int)$third_perc[1]]];
+
+$amount_spent = 100;
+
+$resource = Mage::getSingleton('core/resource');
+$readConnection = $resource->getConnection('core_read');
+$writeConnection = $resource->getConnection('core_write');
+$readConnection = $resource->getConnection('core_read');
+$query = 'SELECT card_status FROM scratch_cards where card_status != "0" ORDER BY sid DESC LIMIT 1';
+$results = $readConnection->fetchAll($query);
+
+$card_status = $results[0]['card_status'];
+$chance = ($card_status == '')?'000':$card_status;
+
+$turn = (int)substr($chance, 0, 1);
+$timesBetterLuck = (int)substr($chance, 1, 1);
+$timesCostCredit = (int)substr($chance, 2, 2);
+$lucky_coupan_amount = 0;
+
+if($admin_amount > $amount_spent) {
+    if(($timesCostCredit + $timesBetterLuck)%2 == 0 ){
+        $timesCostCredit = $timesCostCredit + 1;
+        $lucky_coupan_amount = rand((int)($arr[$turn][0]),(int)($arr[$turn][1]));
+    } else {
+        $lucky_coupan_amount = 0;
+        $timesBetterLuck = $timesBetterLuck + 1;
+    }
+
+    if($perc[$turn]/10*2 == $timesBetterLuck + $timesCostCredit){
+        $turn = ($turn == 2)? 0 : ($turn+1);
+        $timesBetterLuck = 0;
+        $timesCostCredit = 0;
+    }
+
+} else {
+    $lucky_coupan_amount = 0;
+    $turn = 0;
+    $timesBetterLuck = 0;
+    $timesCostCredit = 0;
+}
+
+$chance =  $turn . '' . $timesBetterLuck . '' . $timesCostCredit;
+
+if($admin_amount < $amount_spent) {
+    $lucky_coupan_amount = $admin_amount - $amount_spent;
+}
+
+
+$scratchId =$_POST['scratchId'];
+$sql = "UPDATE scratch_cards set card_status = '$chance', amount = '$lucky_coupan_amount' where card_id = '$scratchId'";
+$writeConnection->query($sql);
+echo $lucky_coupan_amount;
+
+?>
