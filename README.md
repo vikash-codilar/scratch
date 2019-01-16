@@ -22,7 +22,7 @@ How To Config:
 
 Front End :
       1) Login as User 
-      2) If user ordered more than 1000 Unit of Currency, he will be eligible for Scratch card benifits
+      2) If user ordered more than 1000 Unit of Currency from debit or credit card, he will be eligible for Scratch card          benifits
       3) You can see the scratch card link on order success page.("You have won a reward Click to view")
       4) Once you click you will be on Rewards Page and you can see 1 unscratched coupon.
       5) by clicking on the card you can see your reward amount. 
